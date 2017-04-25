@@ -4,9 +4,13 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
-    "ga4gh-base-controller": "file:///home/david/git/ga4gh-base-controller"
+    "ga4gh-base-controller": "file:///home/david/git/ga4gh-base-controller",
+    "request": "^2.81.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-preset-env": "^1.4.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
