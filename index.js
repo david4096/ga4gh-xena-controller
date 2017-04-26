@@ -3,7 +3,7 @@ var controller = require('ga4gh-base-controller')({});
 var url = "https://singlecell.xenahubs.net/data/";
 
 var http = require("http");
-var options = {
+var httpOptions = {
   hostname: 'toil.xenahubs.net',
   port: 80,
   path: '/data/',
@@ -23,7 +23,7 @@ Gene names from dataset
 */
 
 function post(query, callback) {
-  var req = http.request(options, function(res) {
+  var req = http.request(httpOptions, function(res) {
     var body = "";
     console.log('Status: ' + res.statusCode);
     console.log('Headers: ' + JSON.stringify(res.headers));
@@ -136,5 +136,14 @@ controller.searchExpressionLevels = function(call, callback) {
 }
 
 module.exports = function (options) {
+  if (options.hostname) {
+    httpOptions.hostname = options.hostname;
+  }
+  if (options.port) {
+    httpOptions.port = options.port;
+  }
+  if (options.path) {
+    httpOptions.path = options.path;
+  }
   return controller;
 }
