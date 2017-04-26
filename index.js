@@ -1,5 +1,5 @@
 var request = require('request');
-var controller = require('ga4gh-base-controller');
+var controller = require('ga4gh-base-controller')({});
 var url = "https://singlecell.xenahubs.net/data/";
 
 var http = require("http");
@@ -135,4 +135,6 @@ controller.searchExpressionLevels = function(call, callback) {
   })
 }
 
-module.exports = controller;
+module.exports = function (options) {
+  return controller;
+}
