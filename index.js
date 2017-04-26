@@ -1,8 +1,21 @@
-var request = require('request');
-var controller = require('ga4gh-base-controller')({});
-var url = "https://singlecell.xenahubs.net/data/";
+// ga4gh-xena-controller
+//
+// This file cpresents controller functions which can be used to access data
+// from a Xena server using GA4GH RPC methods.
+//
+// It exports a module that accepts options, which are used to direct the
+// controller at different Xena servers.
+//
+// For a simpler example see [ga4gh-base-controller](https://github.com/david4096/ga4gh-base-controller)
 
+// We extend this module by adding our own named functions.
+var controller = require('ga4gh-base-controller')({});
+
+// Used to make requests to the Xena server
 var http = require("http");
+
+// The hostname port and path must be overwritten using options if you want
+// to point at a different Xena hub.
 var httpOptions = {
   hostname: 'toil.xenahubs.net',
   port: 80,
@@ -12,6 +25,7 @@ var httpOptions = {
       'Content-Type': 'text/plain',
   }
 };
+
 /*
 Gene names from dataset
 
@@ -22,11 +36,14 @@ Gene names from dataset
 
 */
 
+// Accepts a Xena query and a callback, which will be run on the entirety of
+// the response body on success, or immediately on error.
+//
+// This callback accepts error and body arguments. On success the error will
+// be set to null.
 function post(query, callback) {
   var req = http.request(httpOptions, function(res) {
     var body = "";
-    console.log('Status: ' + res.statusCode);
-    console.log('Headers: ' + JSON.stringify(res.headers));
     res.setEncoding('utf8');
     res.on('error', function(e) {
       callback(e, null);
