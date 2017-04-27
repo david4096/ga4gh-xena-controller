@@ -1,3 +1,6 @@
+var limitString = require('./utils').limitString;
+var pageToken = require('./utils').pageToken;
+
 function convertDataset(dataset) {
   // Convert our Xena document to G4 schema
   var text;
