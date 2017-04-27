@@ -37,14 +37,14 @@ function addMiddleware(fn) {
 
 module.exports = function (options) {
   // Attach the controllers we've named.
-  controller.SearchBiosamples = require('./SearchBiosamples')(options);
-  controller.SearchFeatures = require('./SearchFeatures')(options);
-  controller.SearchDatasets = require('./SearchDatasets')(options);
+  controller.SearchBiosamples = require('./methods/SearchBiosamples')(options);
+  controller.SearchFeatures = require('./methods/SearchFeatures')(options);
+  controller.SearchDatasets = require('./methods/SearchDatasets')(options);
 
   // And apply any middleware we've made.
   Object.keys(controller).map(function(key) {
     controller[key] = addMiddleware(controller[key]);
   });
-  
+
   return controller;
 }
