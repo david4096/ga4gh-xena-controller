@@ -1,5 +1,5 @@
-var limitString = require('./utils').limitString;
-var pageToken = require('./utils').pageToken;
+var limitString = require('../utils').limitString;
+var pageToken = require('../utils').pageToken;
 
 function convertFeature(call, feature) {
   var g4 = {};
@@ -17,7 +17,7 @@ function convertFeatures(call, features) {
 }
 
 module.exports = function(options) {
-  var post = require('./post')(options);
+  var post = require('../post')(options);
   return function(call, callback) {
     // Since in Xena, each dataset has only one feature set, we can fudge by
     // calling the feature set ID the same as the dataset ID.

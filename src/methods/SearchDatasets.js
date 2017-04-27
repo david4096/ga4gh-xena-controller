@@ -1,5 +1,5 @@
-var limitString = require('./utils').limitString;
-var pageToken = require('./utils').pageToken;
+var limitString = require('../utils').limitString;
+var pageToken = require('../utils').pageToken;
 
 function convertDataset(dataset) {
   // Convert our Xena document to G4 schema
@@ -17,7 +17,7 @@ function convertDataset(dataset) {
 }
 
 module.exports = function(options) {
-  var post = require('./post')(options);
+  var post = require('../post')(options);
   return function(call, callback) {
     var query = `(query
       {:select

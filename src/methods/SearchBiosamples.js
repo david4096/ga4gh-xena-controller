@@ -1,5 +1,5 @@
-var limitString = require('./utils').limitString;
-var pageToken = require('./utils').pageToken;
+var limitString = require('../utils').limitString;
+var pageToken = require('../utils').pageToken;
 
 // TODO
 function convertBiosample(biosample) {
@@ -11,7 +11,7 @@ function convertBiosample(biosample) {
 }
 
 module.exports = function(options) {
-  var post = require('./post')(options);
+  var post = require('../post')(options);
   // TODO how do we grab the number ID columns? what do they mean?
   return function(call, callback) {
     var query = `(query {:select [:*]

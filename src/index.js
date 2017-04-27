@@ -40,7 +40,21 @@ module.exports = function (options) {
   controller.SearchBiosamples = require('./methods/SearchBiosamples')(options);
   controller.SearchFeatures = require('./methods/SearchFeatures')(options);
   controller.SearchDatasets = require('./methods/SearchDatasets')(options);
-
+  controller.SearchExpressionLevels = function(call, callback) {
+    var query = `(let [probemap (:probemap (car (query {:select [:probemap]
+                                      :from [:dataset]
+                                      :where [:= :id ${call.request.dataset_id}]})))
+     probes-for-gene (fn [gene] ((xena-query {:select ["name"] :from [probemap] :where [:in :any "genes" [gene]]}) "name"))
+     avg (fn [scores] (mean scores 0))
+     scores-for-gene (fn [gene]
+         (let [probes (probes-for-gene gene)
+               scores (fetch [{:table ${call.request.dataset_id}
+                               :samples %${call.request.samples}
+                               :columns (probes-for-gene gene)}])]
+           {:gene gene
+            :scores (if (car probes) (avg scores) [[]])}))]
+ (map scores-for-gene ${call.request.genes}))`;
+  }
   // And apply any middleware we've made.
   Object.keys(controller).map(function(key) {
     controller[key] = addMiddleware(controller[key]);
