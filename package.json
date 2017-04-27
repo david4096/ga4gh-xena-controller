@@ -2,9 +2,9 @@
   "name": "ga4gh-xena-controller",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/index.js",
   "dependencies": {
-    "ga4gh-base-controller": "file:///home/david/git/ga4gh-base-controller",
+    "ga4gh-base-controller": "file:///home/david/git/node/ga4gh-base-controller",
     "request": "^2.81.0"
   },
   "devDependencies": {
